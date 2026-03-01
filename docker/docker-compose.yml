@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: music-ag-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: music_ag_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: music_redis
+    ports:
+      - "6379:6379"
+
+  app-api:
+    build:
+      context: ../apps/app-api
+      dockerfile: ../../docker/api/Dockerfile
+    container_name: music_ag_app_api
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/music_db
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "3000:3000"
+
+  app-worker:
+    build:
+      context: ../apps/app-worker
+      dockerfile: ../../docker/worker/Dockerfile-worker
+    container_name: music_ag_app_worker
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/music_db
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  pgdata:
