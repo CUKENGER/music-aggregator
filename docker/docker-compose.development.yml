@@ -26,9 +26,8 @@ services:
       context: ..
       dockerfile: docker/api-dev/Dockerfile
     container_name: music_ag_app_api
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-      REDIS_URL: ${REDIS_URL}
+    env_file:
+      - .env.template.dev
     depends_on:
       - postgres
       - redis
@@ -42,9 +41,8 @@ services:
       context: ..
       dockerfile: docker/worker-dev/Dockerfile
     container_name: music_ag_app_worker
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
-      REDIS_URL: ${REDIS_URL}
+    env_file:
+      - .env.template.dev
     depends_on:
       - postgres
       - redis
