@@ -1,12 +1,12 @@
 FROM node:20-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 RUN npm install
 
-COPY ../../apps/app-api ./ 
+COPY . .
 RUN npm run build
 
 EXPOSE 3000
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/apps/app-api/main.js"]

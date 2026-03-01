@@ -19,8 +19,8 @@ services:
 
   app-api:
     build:
-      context: ../apps/app-api
-      dockerfile: ../../docker/api/Dockerfile
+      context: ..
+      dockerfile: docker/api/Dockerfile
     container_name: music_ag_app_api
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/music_db
@@ -33,8 +33,8 @@ services:
 
   app-worker:
     build:
-      context: ../apps/app-worker
-      dockerfile: ../../docker/worker/Dockerfile-worker
+      context: ..
+      dockerfile: docker/worker/Dockerfile
     container_name: music_ag_app_worker
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/music_db

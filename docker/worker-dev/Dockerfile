@@ -6,6 +6,5 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-RUN npm run build
 
-CMD ["node", "dist/apps/app-worker/main.js"]
+CMD ["npm", "run", "start:dev:worker"]

@@ -9,4 +9,4 @@ import { Module } from '@nestjs/common';
     // BullModule.registerQueue({ name: 'search-tasks' }),
   ],
 })
-export class AppModule {}
+export class AppWorkerModule {}
