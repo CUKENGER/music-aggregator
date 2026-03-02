@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
-import { IMusicProvider, TrackMeta } from './interfaces/provider.interface';
 import { Injectable, Logger } from '@nestjs/common';
+import { IMusicProvider, TrackMeta } from '../types';
 
 @Injectable()
 export class YouTubeProvider implements IMusicProvider {

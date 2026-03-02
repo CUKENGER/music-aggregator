@@ -9,23 +9,29 @@ generator client {
 }
 
 model Artist {
-    id       String  @id @default(cuid())
-    deezerId String  @unique
-    name     String
-    tracks   Track[]
+    id           String   @id @default(cuid())
+    deezerId     String?  @unique
+    soundcloudId String?  @unique
+    name         String
+    avatar       String?
+    followers    Int?
+    verified     Boolean?
+    tracks       Track[]
 }
 
 model Album {
-    id       String  @id @default(cuid())
-    deezerId String  @unique
-    title    String
-    cover    String
-    tracks   Track[]
+    id           String  @id @default(cuid())
+    deezerId     String? @unique
+    soundcloudId String? @unique
+    title        String
+    cover        String
+    tracks       Track[]
 }
 
 model Track {
-    id                      String   @id @default(cuid())
-    deezerId                String   @unique
+    id                      String    @id @default(cuid())
+    deezerId                String?   @unique
+    soundcloudId            String?   @unique
     title                   String
     duration                Int
     source                  String
@@ -41,9 +47,15 @@ model Track {
     explicit_content_cover  Int?
     md5_image               String?
     type                    String?
-    createdAt               DateTime @default(now())
-    artistId                String?
-    albumId                 String?
-    artist                  Artist?  @relation(fields: [artistId], references: [id])
-    album                   Album?   @relation(fields: [albumId], references: [id])
+    playbackCount           Int?
+    likes                   Int?
+    comments                Int?
+    reposts                 Int?
+    createdAt               DateTime  @default(now())
+    releaseDate             DateTime?
+
+    artistId String?
+    albumId  String?
+    artist   Artist? @relation(fields: [artistId], references: [id])
+    album    Album?  @relation(fields: [albumId], references: [id])
 }

@@ -1,12 +1,8 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import {
-  DeezerTrackMeta,
-  IMusicProvider,
-  TrackMeta,
-} from './interfaces/provider.interface';
 import Redis from 'ioredis';
 import { PrismaService } from 'libs/prisma/prisma.service';
 import { REDIS_CLIENT } from 'libs/common/consts';
+import { IMusicProvider, DeezerTrackMeta, TrackMeta } from '../types';
 
 @Injectable()
 export class DeezerProvider implements IMusicProvider {

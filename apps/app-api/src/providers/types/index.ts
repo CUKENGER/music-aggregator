@@ -1,10 +1,14 @@
+import { Readable } from 'stream';
+
 export interface IMusicProvider {
+  source: string;
+
   search(
     query: string,
     limit?: number,
   ): Promise<TrackMeta[] | DeezerTrackMeta[]>;
   getTrack(id: string): Promise<TrackMeta>;
-  getStream(id: string): Promise<string>;
+  getStream(id: string): Promise<string | Readable>;
 }
 
 export type TrackMeta = {
@@ -60,4 +64,42 @@ export interface DeezerTrackMeta {
   };
 
   type?: string;
+}
+
+export interface SoundcloudTrackMeta {
+  id: string;
+  title: string;
+  duration?: number;
+  source: string;
+
+  // soundcloud-specific
+  artwork?: string;
+  genre?: string;
+  tags?: string;
+  license?: string;
+  downloadable?: boolean;
+
+  permalink?: string;
+  waveform?: string;
+
+  playbackCount?: number;
+  likes?: number;
+  comments?: number;
+  reposts?: number;
+
+  createdAt?: string;
+  releaseDate?: string;
+
+  media?: {
+    transcodings?: { url: string; format?: { protocol: string; mime_type: string }; quality?: string }[];
+  };
+
+  artistMeta?: {
+    id?: string;
+    username?: string;
+    avatar?: string;
+    followers?: number;
+    verified?: boolean;
+    permalink?: string;
+  };
 }
