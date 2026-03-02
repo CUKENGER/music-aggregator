@@ -1,0 +1,49 @@
+datasource db {
+    provider = "postgresql"
+}
+
+generator client {
+    provider     = "prisma-client-js"
+    output       = "../src/generated/prisma/client"
+    moduleFormat = "cjs"
+}
+
+model Artist {
+    id       String  @id @default(cuid())
+    deezerId String  @unique
+    name     String
+    tracks   Track[]
+}
+
+model Album {
+    id       String  @id @default(cuid())
+    deezerId String  @unique
+    title    String
+    cover    String
+    tracks   Track[]
+}
+
+model Track {
+    id                      String   @id @default(cuid())
+    deezerId                String   @unique
+    title                   String
+    duration                Int
+    source                  String
+    preview                 String?
+    link                    String?
+    cover                   String?
+    rank                    Int?
+    explicit                Boolean?
+    title_short             String?
+    title_version           String?
+    explicit_lyrics         Boolean?
+    explicit_content_lyrics Int?
+    explicit_content_cover  Int?
+    md5_image               String?
+    type                    String?
+    createdAt               DateTime @default(now())
+    artistId                String?
+    albumId                 String?
+    artist                  Artist?  @relation(fields: [artistId], references: [id])
+    album                   Album?   @relation(fields: [albumId], references: [id])
+}
