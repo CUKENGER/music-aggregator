@@ -2,11 +2,7 @@ import { Readable } from 'stream';
 
 export interface IMusicProvider {
   source: string;
-
-  search(
-    query: string,
-    limit?: number,
-  ): Promise<TrackMeta[] | DeezerTrackMeta[]>;
+  search(query: string, limit?: number): Promise<TrackMeta[]>;
   getTrack(id: string): Promise<TrackMeta>;
   getStream(id: string): Promise<string | Readable>;
 }
@@ -91,7 +87,11 @@ export interface SoundcloudTrackMeta {
   releaseDate?: string;
 
   media?: {
-    transcodings?: { url: string; format?: { protocol: string; mime_type: string }; quality?: string }[];
+    transcodings?: {
+      url: string;
+      format?: { protocol: string; mime_type: string };
+      quality?: string;
+    }[];
   };
 
   artistMeta?: {
