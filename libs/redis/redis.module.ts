@@ -8,10 +8,7 @@ import { REDIS_CLIENT } from 'libs/common/consts';
     {
       provide: REDIS_CLIENT,
       useFactory: () => {
-        const client = new Redis({
-          host: process.env.REDIS_HOST || 'localhost',
-          port: Number(process.env.REDIS_PORT) || 6379,
-        });
+        const client = new Redis(process.env.REDIS_URL!);
         client.on('error', (err) => console.error('Redis error', err));
         return client;
       },

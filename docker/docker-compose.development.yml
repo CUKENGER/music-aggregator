@@ -17,7 +17,7 @@ services:
     image: redis:7
     container_name: music_redis
     ports:
-      - '${REDIS_PORT}:${REDIS_PORT}'
+      - '6389:${REDIS_PORT}'
     networks:
       - music_ag_network
 
@@ -38,6 +38,7 @@ services:
       - music_ag_network
     volumes:
       - ..:/app
+      - /app/node_modules
 
   app-worker:
     build:
@@ -53,6 +54,7 @@ services:
       - music_ag_network
     volumes:
       - ..:/app
+      - /app/node_modules
 
 volumes:
   pgdata:
