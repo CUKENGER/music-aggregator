@@ -5,6 +5,8 @@ import { YouTubeProvider } from './youtube/youtube.provider';
 import { MUSIC_PROVIDERS } from 'libs/common/consts';
 import { SoundCloudProvider } from './soundcloud/soundcloud.provider';
 import { DeezerProvider } from './deezer/deezer.provider';
+import { StreamService } from '../modules/stream/stream.service';
+import { StreamController } from '../modules/stream/stream.controller';
 
 @Module({
   providers: [
@@ -21,8 +23,9 @@ import { DeezerProvider } from './deezer/deezer.provider';
       ) => [yt, dz, sc],
       inject: [YouTubeProvider, DeezerProvider, SoundCloudProvider],
     },
+    StreamService,
   ],
-  controllers: [SearchController],
+  controllers: [SearchController, StreamController],
   exports: [SearchService],
 })
 export class ProvidersModule {}

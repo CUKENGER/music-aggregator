@@ -1,6 +1,5 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Soundcloud } from 'soundcloud.ts';
-import { Readable } from 'stream';
 import { IMusicProvider, TrackMeta } from '../types';
 import { REDIS_CLIENT } from 'libs/common/consts';
 import { PrismaService } from 'libs/prisma/prisma.service';
@@ -49,7 +48,7 @@ export class SoundCloudProvider implements IMusicProvider {
     };
   }
 
-  async getStream(id: string): Promise<Readable> {
+  async getStream(id: string): Promise<NodeJS.ReadableStream> {
     const stream = await this.sc.util.streamTrack(id);
 
     return stream;

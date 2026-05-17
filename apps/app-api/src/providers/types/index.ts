@@ -1,10 +1,8 @@
-import { Readable } from 'stream';
-
 export interface IMusicProvider {
   source: string;
   search(query: string, limit?: number): Promise<TrackMeta[]>;
   getTrack(id: string): Promise<TrackMeta>;
-  getStream(id: string): Promise<string | Readable>;
+  getStream(id: string): Promise<NodeJS.ReadableStream>;
 }
 
 export type TrackMeta = {
