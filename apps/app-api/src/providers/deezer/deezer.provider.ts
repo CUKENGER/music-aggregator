@@ -81,8 +81,6 @@ export class DeezerProvider implements IMusicProvider {
 
       const data = raw;
 
-      this.logger.log('data', data);
-
       if (!Array.isArray(data.data)) return [];
 
       const tracks: TrackMeta[] = data.data.map((t) => ({

@@ -10,7 +10,7 @@ export interface IMusicProvider {
 export type TrackMeta = {
   id: string;
   title: string;
-  artist: string;
+  artist?: string;
   album?: string;
   duration?: number;
   source: string;
